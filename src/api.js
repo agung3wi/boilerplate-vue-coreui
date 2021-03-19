@@ -1,8 +1,8 @@
 import axios from 'axios'
 import store from './store'
-
+console.log(process.env);
 let http = axios.create({
-  baseURL: process.env.BASE_URL_API || 'http://127.0.0.1:8000/api'
+  baseURL: process.env.VUE_APP_API_URL || 'http://127.0.0.1:8000'
 })
 
 http.interceptors.request.use(request => {

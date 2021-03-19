@@ -6,7 +6,7 @@
 export default {
   name: "app",
   async created() {
-    this.$http.get("/me");
+    // this.$http.get("/me");
   },
 };
 </script>
