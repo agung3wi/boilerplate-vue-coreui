@@ -34,6 +34,10 @@ export default {
   },
   methods: {
     async logout() {
+      await this.$http
+        .get("/logout")
+        .then((res) => {})
+        .catch((err) => {});
       this.$store.commit("set", ["isLogeddin", false]);
       this.$store.commit("set", ["token", null]);
       this.$router.push({ name: "Login" });

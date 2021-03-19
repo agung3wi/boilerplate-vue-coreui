@@ -209,7 +209,6 @@
                 type="submit"
                 variant="primary"
                 class="px-4"
-                @click="save()"
                 >Submit</b-button
               >
               <b-button
@@ -217,7 +216,6 @@
                 type="submit"
                 variant="primary"
                 class="px-4"
-                @click="save()"
                 >Submit</b-button
               >&nbsp;
               <b-button
