@@ -80,7 +80,7 @@ export default {
           this.$router.push({ name: "Dashboard" });
         })
         .catch((err) => {
-          alert("Gagal Login");
+          this.alert.error(err.message);
         });
     },
   },

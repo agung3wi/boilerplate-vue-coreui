@@ -122,9 +122,9 @@
             </b-row>
           </template>
           <template v-else>
-            <b-alert show
+            <b-this.alert show
               >Belum ada data, silakan klik Tambah Pengguna untuk menambahkan
-              data</b-alert
+              data</b-this.alert
             >
           </template>
         </b-card>
@@ -237,7 +237,6 @@
 </template>
 
 <script>
-import Alert from "../../sw";
 export default {
   name: "User",
   props: {
@@ -337,7 +336,7 @@ export default {
         item.active == "Y"
           ? "Berhasil menonkatifkan User ini."
           : "Berhasil mengaktifkan User ini.";
-      let confirm = await Alert.confirm(message).catch((err) => {
+      let confirm = await this.alert.confirm(message).catch((err) => {
         return false;
       });
       if (confirm) {
@@ -345,7 +344,7 @@ export default {
           await this.$http.post("/user/remove", { id: item.id });
         else await this.$http.post("/user/restore", { id: item.id });
 
-        Alert.success(messageConfirmed);
+        this.alert.success(messageConfirmed);
         this.get();
       }
     },
@@ -360,24 +359,24 @@ export default {
         this.$http
           .post("/user/add", this.input)
           .then((res) => {
-            Alert.success("Berhasil menambahkan User");
+            this.alert.success("Berhasil menambahkan User");
             this.$refs.modalForm.hide();
             this.get();
           })
           .catch((err) => {
-            Alert.error(err.message);
+            this.alert.error(err.message);
             return;
           });
       } else if (this.mode == "edit") {
         this.$http
           .post("/user/edit", this.input)
           .then((res) => {
-            Alert.success("Berhasil mengubah User");
+            this.alert.success("Berhasil mengubah User");
             this.$refs.modalForm.hide();
             this.get();
           })
           .catch((err) => {
-            Alert.error(err.message);
+            this.alert.error(err.message);
             e.preventDefault();
             return;
           });
@@ -394,10 +393,10 @@ export default {
       this.$http
         .post("/reset-password", input)
         .then((res) => {
-          Alert.success(res.message);
+          this.alert.success(res.message);
         })
         .catch((err) => {
-          Alert.error(err.message);
+          this.alert.error(err.message);
         });
     },
   },

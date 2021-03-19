@@ -12,9 +12,10 @@ import router from './router'
 import store from './store'
 import api from "./api"
 import vSelect from 'vue-select'
-
+import Alert from "./sw"
 Vue.component('v-select', vSelect)
 Vue.prototype.$http = api;
+Vue.prototype.alert = Alert;
 Vue.use(BootstrapVue)
 
 Vue.mixin({
