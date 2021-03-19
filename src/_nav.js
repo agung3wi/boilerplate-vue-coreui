@@ -10,6 +10,18 @@ export default {
       }
     },
     {
+      name: 'System',
+      url: '/system',
+      icon: 'icon-star',
+      children: [
+        {
+          name: 'User',
+          url: '/system/user',
+          icon: 'icon-star'
+        }
+      ]
+    },
+    {
       name: 'Pages',
       url: '/pages',
       icon: 'icon-star',

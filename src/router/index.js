@@ -15,6 +15,8 @@ const Page404 = () => import('@/views/pages/Page404')
 const Page500 = () => import('@/views/pages/Page500')
 const Login = () => import('@/views/pages/Login')
 
+const User = () => import('@/views/system/User')
+
 Vue.use(Router)
 
 let routes = new Router({
@@ -34,6 +36,19 @@ let routes = new Router({
           name: 'Dashboard',
           component: Dashboard
         },
+      ]
+    },
+    {
+      path: '/system',
+      redirect: '/system/user',
+      name: 'System',
+      component: DefaultContainer,
+      children: [
+        {
+          path: 'user',
+          name: 'User',
+          component: User
+        }
       ]
     },
     {

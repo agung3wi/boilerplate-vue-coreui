@@ -76,6 +76,7 @@ export default {
         .then(async (res) => {
           this.$store.commit("set", ["isLogeddin", true]);
           this.$store.commit("set", ["token", res.token]);
+          this.$store.commit("set", ["tasks", res.tasks]);
           this.$router.push({ name: "Dashboard" });
         })
         .catch((err) => {
