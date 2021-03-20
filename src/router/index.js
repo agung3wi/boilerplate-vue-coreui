@@ -16,6 +16,7 @@ const Page500 = () => import('@/views/pages/Page500')
 const Login = () => import('@/views/pages/Login')
 
 const User = () => import('@/views/system/User')
+const Permission = () => import('@/views/system/Permission')
 
 Vue.use(Router)
 
@@ -48,6 +49,11 @@ let routes = new Router({
           path: 'user',
           name: 'User',
           component: User
+        },
+        {
+          path: 'permission',
+          name: 'Permission',
+          component: Permission
         }
       ]
     },

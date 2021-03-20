@@ -18,6 +18,11 @@ export default {
           name: 'User',
           url: '/system/user',
           icon: 'icon-star'
+        },
+        {
+          name: 'Permission',
+          url: '/system/permission',
+          icon: 'icon-star'
         }
       ]
     },
