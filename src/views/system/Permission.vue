@@ -34,13 +34,11 @@
                 </template> -->
                 <template
                   v-for="role in roles"
-                  :slot="'cat_' + role.role_code.replace('-', '_')"
+                  :slot="role.role_code"
                   slot-scope="data"
                 >
                   <b-form-checkbox
-                    v-model="
-                      data.item['cat_' + role.role_code.replace('-', '_')]
-                    "
+                    v-model="data.item[role.role_code]"
                     value="Y"
                     unchecked-value="N"
                   ></b-form-checkbox>
@@ -134,8 +132,8 @@ export default {
         this.roles = res.items;
         this.fields = res.items.map((item) => {
           return {
-            key: `cat_${item.role_code.replace("-", "_")}`,
-            label: item.role_code,
+            key: item.role_code,
+            label: item.role_name,
           };
         });
         this.fields.unshift({

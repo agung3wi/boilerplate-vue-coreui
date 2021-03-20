@@ -20,6 +20,11 @@ export default {
           icon: 'icon-star'
         },
         {
+          name: 'Role',
+          url: '/system/role',
+          icon: 'icon-star'
+        },
+        {
           name: 'Permission',
           url: '/system/permission',
           icon: 'icon-star'
