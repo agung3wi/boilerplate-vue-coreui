@@ -121,10 +121,7 @@
             </b-row>
           </template>
           <template v-else>
-            <b-this.alert show
-              >Belum ada data, silakan klik Tambah Pengguna untuk menambahkan
-              data</b-this.alert
-            >
+            <b-alert show>Tidak ditemukan Data Pengguna</b-alert>
           </template>
         </b-card>
       </transition>
@@ -136,7 +133,7 @@
         title="Form User"
         hide-footer
       >
-        <UserInput :simpan="save" :input="input" :mode="mode"></UserInput>
+        <UserInput :save="save" :input="input" :mode="mode"></UserInput>
       </b-modal>
     </b-col>
   </b-row>
