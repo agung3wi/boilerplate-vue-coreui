@@ -4,7 +4,6 @@
       <transition name="slide">
         <b-card>
           <div slot="header" v-html="caption"></div>
-          <b-row></b-row>
           <b-row>
             <b-col cols="6" xl="3">
               <b-form-group>
@@ -132,111 +131,25 @@
       <b-modal
         no-close-on-backdrop
         size="lg"
-        id="modalForm"
-        ref="modalForm"
+        id="userForm"
+        ref="userForm"
         title="Form User"
         hide-footer
       >
-        <form @submit.prevent="save">
-          <b-row class="my-1">
-            <b-col sm="4" lg="3">
-              <label for="username">
-                Username
-                <i class="red" v-if="mode == 'add'">*</i>
-              </label>
-            </b-col>
-            <b-col sm="8" lg="9">
-              <b-form-input
-                :readonly="mode != 'add'"
-                v-model="input.username"
-              ></b-form-input>
-            </b-col>
-          </b-row>
-          <b-row class="my-1">
-            <b-col sm="4" lg="3">
-              <label for="name">
-                Nama Lengkap
-                <i class="red">*</i>
-              </label>
-            </b-col>
-            <b-col sm="8" lg="9">
-              <b-form-input v-model="input.name"></b-form-input>
-            </b-col>
-          </b-row>
-          <b-row class="my-1" v-if="mode == 'add'">
-            <b-col sm="4" lg="3">
-              <label for="password">
-                Password
-                <i class="red">*</i>
-              </label>
-            </b-col>
-            <b-col sm="8" lg="9">
-              <b-form-input
-                type="password"
-                v-model="input.password"
-              ></b-form-input>
-            </b-col>
-          </b-row>
-          <b-row class="my-1">
-            <b-col sm="4" lg="3">
-              <label for="email">Email</label>
-            </b-col>
-            <b-col sm="8" lg="9">
-              <b-form-input v-model="input.email"></b-form-input>
-            </b-col>
-          </b-row>
-          <b-row class="my-1">
-            <b-col sm="4" lg="3">
-              <label for="role_id">Role</label>
-            </b-col>
-            <b-col sm="8" lg="9">
-              <v-select
-                placeholder="-- Pilih Role --"
-                label="role_name"
-                :options="roleList"
-                v-model="input.role_id"
-                :reduce="(op) => op.id"
-              />
-            </b-col>
-          </b-row>
-          <b-row class="my-1">
-            <b-col sm="4" lg="3">
-              <label for="role_id">&nbsp;</label>
-            </b-col>
-            <b-col sm="8" lg="9">
-              <b-button
-                v-if="hasPermission('super-admin') && mode == 'add'"
-                type="submit"
-                variant="primary"
-                class="px-4"
-                >Submit</b-button
-              >
-              <b-button
-                v-if="hasPermission('super-admin') && mode == 'edit'"
-                type="submit"
-                variant="primary"
-                class="px-4"
-                >Submit</b-button
-              >&nbsp;
-              <b-button
-                v-if="hasPermission('super-admin') && mode == 'edit'"
-                type="button"
-                variant="primary"
-                class="px-4"
-                @click="resetPassword()"
-                ><i class="fa-fa-refresh"></i> Reset Password</b-button
-              >
-            </b-col>
-          </b-row>
-        </form>
+        <UserInput :simpan="save" :input="input" :mode="mode"></UserInput>
       </b-modal>
     </b-col>
   </b-row>
 </template>
 
 <script>
+import UserInput from "./UserInput";
+
 export default {
   name: "User",
+  components: {
+    UserInput,
+  },
   props: {
     caption: {
       type: String,
@@ -306,12 +219,10 @@ export default {
       ],
       submitted: false,
       total: 0,
-      roleList: [],
     };
   },
   async created() {
     this.get();
-    await this.init();
   },
   methods: {
     async init() {
@@ -350,7 +261,7 @@ export default {
       this.mode = "add";
       this.submitted = false;
       this.input = {};
-      this.$refs.modalForm.show();
+      this.$refs.userForm.show();
     },
     save(e) {
       if (this.mode == "add") {
@@ -358,7 +269,7 @@ export default {
           .post("/user/add", this.input)
           .then((res) => {
             this.alert.success("Berhasil menambahkan User");
-            this.$refs.modalForm.hide();
+            this.$refs.userForm.hide();
             this.get();
           })
           .catch((err) => {
@@ -384,7 +295,7 @@ export default {
       this.input = await this.$http.get("/user/find", { id: id });
       this.mode = "edit";
       this.submitted = false;
-      this.$refs.modalForm.show();
+      this.$refs.userForm.show();
     },
     resetPassword() {
       let input = this.input;

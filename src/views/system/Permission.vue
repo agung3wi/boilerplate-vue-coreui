@@ -4,14 +4,28 @@
       <transition name="slide">
         <b-card>
           <div slot="header" v-html="caption"></div>
-          <b-row>
-            <b-col cols="12" xl="12">
-              <b-button @click="save()" variant="success">
-                Simpan
-                <i class="fa fa-save"></i>
-              </b-button>
-            </b-col>
-          </b-row>
+          <b-form @submit.prevent="get()">
+            <b-row>
+              <b-col cols="6" xl="3">
+                <b-form-group>
+                  <b-input-group>
+                    <b-form-input
+                      type="text"
+                      placeholder="Cari ..."
+                      v-model="filter.src"
+                      @change="get()"
+                    ></b-form-input>
+                  </b-input-group>
+                </b-form-group>
+              </b-col>
+              <b-col cols="6" xl="3">
+                <b-button @click="save()" variant="success">
+                  Simpan
+                  <i class="fa fa-save"></i>
+                </b-button>
+              </b-col>
+            </b-row>
+          </b-form>
           <br />
           <b-row>
             <b-col cols="12" xl="12">
@@ -113,6 +127,7 @@ export default {
   },
   data: () => {
     return {
+      filter: {},
       items: [],
       roles: [],
       fields: [
@@ -144,7 +159,7 @@ export default {
       this.get();
     },
     get() {
-      this.$http.get("/permission").then((res) => {
+      this.$http.get("/permission", this.filter).then((res) => {
         this.items = res;
       });
     },
