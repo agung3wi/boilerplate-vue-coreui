@@ -208,7 +208,7 @@ export default {
         },
         {
           key: "active",
-          label: "Active",
+          label: "Status",
           sortable: true,
         },
         {
