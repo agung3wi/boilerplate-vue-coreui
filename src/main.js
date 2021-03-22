@@ -11,16 +11,19 @@ import App from './App'
 import router from './router'
 import store from './store'
 import api from "./api"
-import vSelect from 'vue-select'
 import Alert from "./sw"
+
+import vSelect from 'vue-select'
+import InputGroup from "./components/InputGroup"
 import InputText from "./components/InputText"
 import InputSelect from "./components/InputSelect"
 import TextArea from "./components/TextArea"
 import SubmitButton from "./components/SubmitButton"
+
 Vue.component('v-select', vSelect)
+Vue.component('input-group', InputGroup)
 Vue.component('input-text', InputText)
 Vue.component('input-select', InputSelect)
-
 Vue.component('text-area', TextArea)
 Vue.component('submit-button', SubmitButton)
 

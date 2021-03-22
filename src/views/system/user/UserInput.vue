@@ -23,13 +23,30 @@
           :fieldname="'Password'"
           v-model="input.password"
         />
-        <input-select
+        <!-- <input-select
           selected_text="role_name"
           selected_value="id"
           fieldname="Role"
           v-model="input.role_id"
           :options="roleList"
-        />
+        /> -->
+        <input-group :fieldname="'Role'">
+          <template v-slot:content>
+            <b-row>
+              <b-col cols="9">
+                <v-select
+                  :options="roleList"
+                  label="role_name"
+                  :reduce="(data) => data.id"
+                  v-model="input.role_id"
+                ></v-select>
+              </b-col>
+              <b-col cols="3">
+                <b-button variant="primary" @click="addRole">+</b-button>
+              </b-col>
+            </b-row>
+          </template>
+        </input-group>
         <submit-button />
       </form>
       <b-modal
@@ -51,11 +68,13 @@
 </template>
 
 <script>
-import RoleInput from "./RoleInput";
+import InputGroup from "../../../components/InputGroup.vue";
+import RoleInput from "../role/RoleInput";
 export default {
   name: "UserInput",
   components: {
     RoleInput,
+    InputGroup,
   },
   data: () => {
     return {

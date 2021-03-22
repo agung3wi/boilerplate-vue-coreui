@@ -15,8 +15,8 @@ const Page404 = () => import('@/views/pages/Page404')
 const Page500 = () => import('@/views/pages/Page500')
 const Login = () => import('@/views/pages/Login')
 
-const User = () => import('@/views/system/User')
-const Role = () => import('@/views/system/Role')
+const User = () => import('@/views/system/user/UserList')
+const Role = () => import('@/views/system/role/RoleList')
 const Permission = () => import('@/views/system/Permission')
 
 Vue.use(Router)
