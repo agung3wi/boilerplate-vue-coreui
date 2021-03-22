@@ -10,6 +10,7 @@
       <input
         :value="value"
         :type="type"
+        :readonly="readonly"
         class="form-control"
         @input="$emit('input', $event.target.value)"
       />
@@ -30,6 +31,10 @@ export default {
       default: "text",
     },
     required: {
+      type: Boolean,
+      default: false,
+    },
+    readonly: {
       type: Boolean,
       default: false,
     },

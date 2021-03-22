@@ -2,6 +2,7 @@
   <form @submit.prevent="save">
     <input-text
       :required="true"
+      :readonly="mode == 'edit'"
       :fieldname="'Kode Role'"
       v-model="input.role_code"
     />
