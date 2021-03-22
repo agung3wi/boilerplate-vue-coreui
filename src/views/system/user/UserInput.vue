@@ -36,6 +36,7 @@
               <b-col cols="9">
                 <v-select
                   :options="roleList"
+                  placeholder="Pilih Role"
                   label="role_name"
                   :reduce="(data) => data.id"
                   v-model="input.role_id"
@@ -45,6 +46,16 @@
                 <b-button variant="primary" @click="addRole">+</b-button>
               </b-col>
             </b-row>
+          </template>
+        </input-group>
+        <input-group :fieldname="'Tanggal'">
+          <template v-slot:content>
+            <input
+              type="file"
+              id="file"
+              ref="file"
+              v-on:change="handleFileUpload()"
+            />
           </template>
         </input-group>
         <submit-button />
@@ -78,6 +89,7 @@ export default {
   },
   data: () => {
     return {
+      myFiles: null,
       roleInput: {},
       roleList: [],
     };
@@ -86,6 +98,18 @@ export default {
     await this.init();
   },
   methods: {
+    handleFileUpload() {
+      let formData = new FormData();
+      formData.append("file", this.$refs.file.files[0]);
+      this.$http
+        .post("/single-file", formData)
+        .then(function () {
+          console.log("SUCCESS!!");
+        })
+        .catch(function () {
+          console.log("FAILURE!!");
+        });
+    },
     async init() {
       this.roleList = await this.$http.get("/role").then((res) => res.items);
     },

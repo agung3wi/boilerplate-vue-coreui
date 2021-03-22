@@ -52,7 +52,10 @@ const api = {
     }
     return http.get(path, config);
   },
-  post: http.post
+  post: http.post,
+  put: http.put,
+  patch: http.patch,
+  delete: http.delete
 }
 
 export default api;
