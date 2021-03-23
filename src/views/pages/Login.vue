@@ -71,7 +71,7 @@ export default {
     doLogin() {
       let input = this.input;
       this.$http
-        .get("/login", input)
+        .post("/login", input)
         .then(async (res) => {
           this.$store.commit("set", ["isLogeddin", true]);
           this.$store.commit("set", ["token", res.token]);

@@ -23,13 +23,7 @@
           :fieldname="'Password'"
           v-model="input.password"
         />
-        <!-- <input-select
-          selected_text="role_name"
-          selected_value="id"
-          fieldname="Role"
-          v-model="input.role_id"
-          :options="roleList"
-        /> -->
+        <hr />
         <input-group :fieldname="'Role'">
           <template v-slot:content>
             <b-row>
@@ -121,7 +115,6 @@ export default {
         this.$http
           .post("/role/add", this.roleInput)
           .then((res) => {
-            this.alert.success("Berhasil menambahkan Role");
             this.$refs.roleForm.hide();
             this.input.role_id = res.id;
             this.init();
