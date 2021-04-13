@@ -22,7 +22,7 @@ http.interceptors.response.use(function (response) {
     console.log("request", response.config)
     console.log("response", response.data)
   }
-  return response.data.result;
+  return response.data;
 }, function (error) {
   store.commit("set", ["isLoading", false]);
   if (error.response) {
