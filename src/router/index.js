@@ -87,7 +87,8 @@ let routes = new Router({
           component: Login
         }
       ]
-    }
+    },
+    { path: "*", component: Page404 }
   ]
 })
 
